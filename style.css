@@ -630,19 +630,34 @@ span {
         margin-top: 1rem;
     }
 
-   @media (max-width: 768px) {
-    .home-img {
-        width: 150px;  /* reduz o círculo */
-        height: 150px;
-        margin-left: 0; /* tira margem que empurra a logo pra direita */
-        margin-top: 1rem; 
-    }
+ @media (max-width: 768px) {
+  /* Ajusta logo do home */
+  .home-img {
+      width: 150px !important;
+      height: 150px !important;
+      margin-left: 0 !important;
+      margin-top: 1rem !important;
+  }
 
-    .home-img img {
-        width: 120%;  /* ajusta a imagem dentro do círculo */
-        transform: translateY(5px); /* ajusta o posicionamento */
-        height: auto;
-    }
+  .home-img img {
+      width: 160% !important;
+      transform: translateY(5px) !important;
+      height: auto !important;
+  }
+
+  /* Ajusta imagem do sobre */
+  .sobre-img img {
+      width: 280px !important;
+      height: auto !important;
+      transform: translateX(0) !important;
+      transition: transform 0.3s ease;
+      display: block;
+      margin: 1rem auto 0 auto; /* centraliza e dá margem topo */
+  }
+
+  .sobre-img img:hover {
+      transform: scale(1.05) !important; /* zoom mais suave e sem deslocamento */
+  }
 }
     
 
