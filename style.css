@@ -214,11 +214,19 @@ span {
     background: var(--second-bg-color);
 }
 
-.sobre-img {
+.sobre {
     display: flex;
     justify-content: center;
-    width: 100%;
-    
+    align-items: center;
+    gap: 2rem;
+    background: var(--second-bg-color);
+}
+
+.sobre-img img {
+    width: 350px; /* diminui a largura da imagem */
+    height: auto; /* mantém proporção */
+    display: block; /* para centralizar com margin auto */
+    margin: 0 auto;
 }
 
 .sobre-img img:hover {
