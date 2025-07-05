@@ -114,8 +114,8 @@ section {
 
 
 .home-img {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -214,15 +214,15 @@ span {
     background: var(--second-bg-color);
 }
 
-.sobre-img img {
-    transform: translateX(-7%);
-    transition: transform 0.3s ease; /* Adiciona suavidade na transição */
-    width: 300px; /* Tamanho fixo para a imagem */
-    height: 300px; /* Mantém a proporção com a largura */
+.sobre-img {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    
 }
 
 .sobre-img img:hover {
-    transform: translateX(-7%) scale(1.1); /* Aplica o zoom ao passar o mouse */
+    transform: scale(1.05); /* aplica apenas o zoom centralizado */
 }
 
 
@@ -495,6 +495,11 @@ span {
     overflow-x: hidden;  /* Impede o scroll horizontal */
 }
 
+.logo {
+    font-size: 1.6rem; /* menor no mobile */
+}
+
+
 
     .navbar {
         position: absolute;
@@ -617,6 +622,17 @@ span {
         margin-top: 1rem;
     }
 
+    @media (max-width: 768px) {
+    .sobre-img img {
+        transform: none;
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+        margin: 0 auto;
+        display: block;
+    }
+}
+
     
 
     .eventos h2 {
@@ -643,6 +659,11 @@ span {
     .contato form .input-box input {
         width: 100%;
     }
+
+    .logo {
+    font-size: 1.4rem;
+}
+
 }
 
 @media (max-width: 365px) {
