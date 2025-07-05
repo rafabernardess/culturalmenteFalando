@@ -630,17 +630,20 @@ span {
         margin-top: 1rem;
     }
 
-    @media (max-width: 768px) {
-    .sobre-img img {
-        transform: none;
-        width: 100%;
-        max-width: 280px;
+   @media (max-width: 768px) {
+    .home-img {
+        width: 150px;  /* reduz o círculo */
+        height: 150px;
+        margin-left: 0; /* tira margem que empurra a logo pra direita */
+        margin-top: 1rem; 
+    }
+
+    .home-img img {
+        width: 120%;  /* ajusta a imagem dentro do círculo */
+        transform: translateY(5px); /* ajusta o posicionamento */
         height: auto;
-        margin: 0 auto;
-        display: block;
     }
 }
-
     
 
     .eventos h2 {
