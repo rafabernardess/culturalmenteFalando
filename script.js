@@ -1,43 +1,68 @@
 let menuIcon = document.querySelector('#menu-icon');
 let navbar = document.querySelector('.navbar');
-
-menuIcon.onclick = () => {
-    menuIcon.classList.toggle('bx-x');
-    navbar.classList.toggle('active');
-}
-
+let header = document.querySelector('header');
 let sections = document.querySelectorAll('section');
 let navLinks = document.querySelectorAll('header nav a');
 
+// Abre e fecha o menu mobile
+menuIcon.onclick = () => {
+    menuIcon.classList.toggle('bx-x');
+    navbar.classList.toggle('active');
+};
 
+// Detecta o scroll e muda a navbar
 window.onscroll = () => {
-    sections.forEach(sec => {
-        let top = window.scrollY;
-        let offset = sec.offsetTop - 150;
-        let height = sec.offsetHeight;
-        let id = sec.getAttribute('id');
+    let top = window.scrollY;
+    let currentSection = '';
 
-        if(top >= offset && top < offset + height) {
-            navLinks.forEach(links => {
-                links.classList.remove('active');
-                document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
-            })
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+
+        if (top >= sectionTop && top < sectionTop + sectionHeight) {
+            currentSection = sectionId;
+
+            // Ativa o link no menu
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(sectionId)) {
+                    link.classList.add('active');
+                }
+            });
         }
-    })
-}
+    });
 
-    let header = document.querySelector('header');
+    // Muda a cor da navbar com base na seção visível
+    switch (currentSection) {
+        case 'home':
+            header.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--nav-home');
+            break;
+        case 'sobre':
+            header.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--nav-sobre');
+            break;
+        case 'missao':
+            header.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--nav-missao');
+            break;
+        case 'eventos':
+            header.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--nav-eventos');
+            break;
+        case 'contato':
+            header.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--nav-contato');
+            break;
+        default:
+            header.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--nav-home');
+    }
 
-    header.classList.toggle('sticky', window.scrollY > 100);
+    // Sticky
+    header.classList.toggle('sticky', top > 100);
+};
 
-    ScrollReveal({
-         reset: true,
-         distance: '80px',
-         duration: 2000,
-         delay: 200
-        });
-
-        ScrollReveal().reveal('.home-content, .heading', { origin: 'top'});
-
-
-
+// ScrollReveal
+ScrollReveal({
+    reset: true,
+    distance: '80px',
+    duration: 2000,
+    delay: 200
+});
+ScrollReveal().reveal('.home-content, .heading', { origin: 'top' });
