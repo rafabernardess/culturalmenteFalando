@@ -90,7 +90,7 @@ section {
 }
 
 .logo-img {
-  height: 2.5rem;     /* Mesma altura da fonte da navbar */
+  height: 4.5rem;     /* Mesma altura da fonte da navbar */
   width: auto;        /* Mantém a proporção da imagem */
   vertical-align: middle; /* Alinha com o texto */
 }
