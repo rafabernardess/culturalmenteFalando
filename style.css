@@ -167,6 +167,7 @@ section {
         width: 420px; /* Tamanho fixo para a imagem */
         height: 340px; /* Mantém a proporção com a largura */
         transform: translateX(-7%);
+        margin-top: 100px;
     
     
 
