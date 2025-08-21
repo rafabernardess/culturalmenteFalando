@@ -259,7 +259,7 @@ span {
 }
 
 .sobre-img img {
-    width: 350px; /* diminui a largura da imagem */
+    width: 320px; /* diminui a largura da imagem */
     height: auto; /* mantém proporção */
     display: block; /* para centralizar com margin auto */
     margin: 0 auto;
