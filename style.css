@@ -580,17 +580,17 @@ span {
 
     .home-content h3 {
         font-size: 2.5rem;
-         padding-top: 20px; 
+         padding-top: 10px; 
     }
 
     .home-content h1 {
         font-size: 4rem;
-         padding-top: 20px; 
+         padding-top: 10px; 
     }
 
     .home-content p {
         font-size: 2.2rem;
-         padding-top: 20px; 
+         padding-top: 10px; 
     }
 
   .social-media {
@@ -654,7 +654,7 @@ span {
         margin-left: -5px; 
         margin-top: 1rem; 
         animation: float 3s ease-in-out infinite, glow 3s ease-in-out infinite;
-         padding-top: 30px; 
+         padding-top: 10px; 
          
     }
     
@@ -688,7 +688,7 @@ span {
     }
 
     .sobre img {
-        width: 340px; /* Ajuste a largura do círculo aqui */
+        width: 280px; /* Ajuste a largura do círculo aqui */
         height: 280px; /* A altura pode ser ajustada para manter ou alterar a proporção */
         margin-top: 1rem;
     }
