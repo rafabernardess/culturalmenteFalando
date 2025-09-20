@@ -221,7 +221,7 @@ document.getElementById('contato-form').addEventListener('submit', function(even
 <!-- Botão Personalizado VLibras -->
 <button id="btnVLibras"
        style="position:fixed; 
-       top:500px; 
+       top:400px; 
        right:10px; 
        z-index:9999; 
        padding:10px 20px; 
@@ -265,32 +265,30 @@ document.getElementById('contato-form').addEventListener('submit', function(even
 
 <!-- Botão de Áudio -->
 <!-- Botão de Áudio -->
-<button id="btnAudio" style="position:fixed; top:450px; right:10px; z-index:9999; padding:10px 20px; border-radius:30px; font-weight: bold; background:#ffffff; color:#000000; border:none; cursor:pointer; font-size:1.5rem;">
+<button id="btnAudio" style="position:fixed; top:350px; right:10px; z-index:9999; padding:10px 20px; border-radius:30px; font-weight: bold; background:#ffffff; color:#000000; border:none; cursor:pointer; font-size:1.5rem;">
   🔊 Áudio
 </button>
 
 <script>
 (function(){
   const btn = document.getElementById('btnAudio');
-
   let isReading = false;
   let chunks = [];
   let selectedVoice = null;
+  let currentUtterance = null;
 
-  // Captura apenas texto visível
-  function getVisibleText(){
+  function getVisibleText() {
     return document.body.innerText.trim();
   }
 
-  // Divide em blocos menores
-  function splitToChunks(text, maxLen = 1000){
+  function splitToChunks(text, maxLen = 1000) {
     const sentences = text.match(/[^.!?]+[.!?]*/g) || [text];
     const out = [];
     let current = '';
     sentences.forEach(s => {
       const trimmed = s.trim();
       if(!trimmed) return;
-      if((current + ' ' + trimmed).length <= maxLen){
+      if((current + ' ' + trimmed).length <= maxLen) {
         current = (current + ' ' + trimmed).trim();
       } else {
         if(current) out.push(current);
@@ -301,8 +299,7 @@ document.getElementById('contato-form').addEventListener('submit', function(even
     return out;
   }
 
-  // Escolhe voz feminina pt-BR
-  function chooseVoice(){
+  function chooseVoice() {
     const voices = window.speechSynthesis.getVoices();
     const female = voices.find(v => v.lang.startsWith("pt-BR") && v.name.toLowerCase().includes("female"));
     const google = voices.find(v => v.lang.startsWith("pt-BR") && v.name.toLowerCase().includes("google"));
@@ -312,44 +309,43 @@ document.getElementById('contato-form').addEventListener('submit', function(even
   chooseVoice();
   window.speechSynthesis.onvoiceschanged = chooseVoice;
 
-  // Fala recursiva
-  function speakNext(){
-    if(!isReading) return;
-    if(chunks.length === 0){
+  function speakNext() {
+    if(!isReading || chunks.length === 0) {
       stopReading();
       return;
     }
+
     const txt = chunks.shift();
-    const u = new SpeechSynthesisUtterance(txt);
-    u.lang = "pt-BR";
-    if(selectedVoice) u.voice = selectedVoice;
-    u.rate = 1;
-    u.pitch = 1;
-    u.volume = 1;
-    u.onend = speakNext;
-    u.onerror = e => {
-      console.error("Erro na leitura:", e);
-      speakNext();
-    };
-    window.speechSynthesis.speak(u);
+    currentUtterance = new SpeechSynthesisUtterance(txt);
+    currentUtterance.lang = "pt-BR";
+    if(selectedVoice) currentUtterance.voice = selectedVoice;
+    currentUtterance.rate = 1;
+    currentUtterance.pitch = 1;
+    currentUtterance.volume = 1;
+
+    currentUtterance.onend = speakNext;
+    currentUtterance.onerror = () => speakNext();
+
+    window.speechSynthesis.cancel(); // garante que nenhuma fala anterior continue
+    window.speechSynthesis.speak(currentUtterance);
   }
 
-  function startReading(){
+  function startReading() {
     window.speechSynthesis.cancel();
     const text = getVisibleText();
     if(!text) return;
     chunks = splitToChunks(text);
     isReading = true;
     btn.textContent = "🔇 Parar Áudio";
-    setTimeout(speakNext, 100);
+    speakNext();
   }
 
-  function stopReading(){
-    // Pausa imediatamente e cancela toda a fila de fala
-    window.speechSynthesis.pause();
-    window.speechSynthesis.cancel();
+  function stopReading() {
+    if(currentUtterance) currentUtterance.onend = null; // previne próxima frase
+    window.speechSynthesis.cancel(); // cancela tudo
     isReading = false;
     chunks = [];
+    currentUtterance = null;
     btn.textContent = "🔊 Áudio";
   }
 
@@ -359,6 +355,7 @@ document.getElementById('contato-form').addEventListener('submit', function(even
   });
 })();
 </script>
+
 
 
 
