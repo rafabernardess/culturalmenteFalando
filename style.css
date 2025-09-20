@@ -572,24 +572,24 @@ span {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start; /* controla verticalmente */
-    padding-top: 220px;           /* afasta do topo */
+    padding-top: 100px;           /* afasta do topo */
     min-height: 100vh;
 }
 
 
 
     .home-content h3 {
-        font-size: 2.9rem;
+        font-size: 2.5rem;
          padding-top: 20px; 
     }
 
     .home-content h1 {
-        font-size: 5rem;
+        font-size: 4rem;
          padding-top: 20px; 
     }
 
     .home-content p {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
          padding-top: 20px; 
     }
 
@@ -666,16 +666,18 @@ span {
     
     .sobre {
         flex-direction: column-reverse;
+        padding-top: 10px;           /* afasta do topo */
+        min-height: 100vh;
          
     }
 
      .sobre-content h3 {
-        font-size: 3rem;
+        font-size: 2.5rem;
          padding-top: 20px; 
     }
 
     .sobre-content h1 {
-        font-size: 5rem;
+        font-size: 4rem;
          padding-top: 20px; 
     }
 
