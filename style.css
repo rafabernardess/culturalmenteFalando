@@ -252,18 +252,6 @@ span {
 
 
 
-.sobre-img img {
-    width: 320px; /* diminui a largura da imagem */
-    height: auto; /* mantém proporção */
-    display: block; /* para centralizar com margin auto */
-    margin: 0 auto;
-}
-
-.sobre-img img:hover {
-    transform: scale(1.05); /* aplica apenas o zoom centralizado */
-}
-
-
 .heading {
     text-align: center;
     font-size: 5rem;
