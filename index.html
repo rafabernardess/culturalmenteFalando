@@ -221,7 +221,7 @@ document.getElementById('contato-form').addEventListener('submit', function(even
 <!-- Botão Personalizado VLibras -->
 <button id="btnVLibras"
        style="position:fixed; 
-       top:400px; 
+       top:500px; 
        right:10px; 
        z-index:9999; 
        padding:10px 20px; 
@@ -264,10 +264,8 @@ document.getElementById('contato-form').addEventListener('submit', function(even
 
 
 <!-- Botão de Áudio -->
-<button id="btnAudio"
-        style="position:fixed; top:350px; right:10px; z-index:9999; padding:10px 20px; border-radius:30px;
-        font-weight: bold; /* Negrito */ background:#ffffff; color:#000000; border:none; cursor:pointer; font-size:1.5rem;">
-        
+<!-- Botão de Áudio -->
+<button id="btnAudio" style="position:fixed; top:450px; right:10px; z-index:9999; padding:10px 20px; border-radius:30px; font-weight: bold; background:#ffffff; color:#000000; border:none; cursor:pointer; font-size:1.5rem;">
   🔊 Áudio
 </button>
 
@@ -306,7 +304,6 @@ document.getElementById('contato-form').addEventListener('submit', function(even
   // Escolhe voz feminina pt-BR
   function chooseVoice(){
     const voices = window.speechSynthesis.getVoices();
-    // tenta pegar uma voz feminina em pt-BR
     const female = voices.find(v => v.lang.startsWith("pt-BR") && v.name.toLowerCase().includes("female"));
     const google = voices.find(v => v.lang.startsWith("pt-BR") && v.name.toLowerCase().includes("google"));
     const microsoft = voices.find(v => v.lang.startsWith("pt-BR") && v.name.toLowerCase().includes("maria"));
@@ -319,24 +316,21 @@ document.getElementById('contato-form').addEventListener('submit', function(even
   function speakNext(){
     if(!isReading) return;
     if(chunks.length === 0){
-      stopReading(true);
+      stopReading();
       return;
     }
     const txt = chunks.shift();
-
     const u = new SpeechSynthesisUtterance(txt);
     u.lang = "pt-BR";
     if(selectedVoice) u.voice = selectedVoice;
-    u.rate = 1;  // velocidade (mais devagar ajuda a dar pausas)
-    u.pitch = 1;   // tom
-    u.volume = 1;  // volume cheio
-
+    u.rate = 1;
+    u.pitch = 1;
+    u.volume = 1;
     u.onend = speakNext;
     u.onerror = e => {
       console.error("Erro na leitura:", e);
       speakNext();
     };
-
     window.speechSynthesis.speak(u);
   }
 
@@ -344,7 +338,6 @@ document.getElementById('contato-form').addEventListener('submit', function(even
     window.speechSynthesis.cancel();
     const text = getVisibleText();
     if(!text) return;
-
     chunks = splitToChunks(text);
     isReading = true;
     btn.textContent = "🔇 Parar Áudio";
@@ -352,6 +345,8 @@ document.getElementById('contato-form').addEventListener('submit', function(even
   }
 
   function stopReading(){
+    // Pausa imediatamente e cancela toda a fila de fala
+    window.speechSynthesis.pause();
     window.speechSynthesis.cancel();
     isReading = false;
     chunks = [];
@@ -364,6 +359,7 @@ document.getElementById('contato-form').addEventListener('submit', function(even
   });
 })();
 </script>
+
 
 
 
