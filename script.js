@@ -66,3 +66,23 @@ ScrollReveal({
     delay: 200
 });
 ScrollReveal().reveal('.home-content, .heading', { origin: 'top' });
+
+// === ACESSIBILIDADE: LEITURA EM VOZ ALTA ===
+let synth = window.speechSynthesis;
+let lendo = false;
+
+document.getElementById("audioBtn").addEventListener("click", () => {
+  if (!lendo) {
+    let texto = document.body.innerText; // Pega todo o texto visível do site
+    let fala = new SpeechSynthesisUtterance(texto);
+    fala.lang = "pt-BR";
+    synth.speak(fala);
+    lendo = true;
+    document.getElementById("audioBtn").innerText = "⏹ Parar Áudio";
+  } else {
+    synth.cancel();
+    lendo = false;
+    document.getElementById("audioBtn").innerText = "🔊 Áudio";
+  }
+});
+
