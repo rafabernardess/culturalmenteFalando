@@ -654,7 +654,8 @@ span {
         margin-left: -5px; 
         margin-top: 1rem; 
         animation: float 3s ease-in-out infinite, glow 3s ease-in-out infinite;
-         padding-top: 100px; 
+         padding-top: 30px; 
+         
     }
     
     
@@ -673,17 +674,17 @@ span {
 
      .sobre-content h3 {
         font-size: 2.5rem;
-         padding-top: 20px; 
+         padding-top: 10px; 
     }
 
     .sobre-content h1 {
         font-size: 4rem;
-         padding-top: 20px; 
+         padding-top: 10px; 
     }
 
     .sobre-content p {
-        font-size: 2.2rem;
-         padding-top: 20px; 
+        font-size: 1.8rem;
+         padding-top: 10px; 
     }
 
     .sobre img {
@@ -709,7 +710,7 @@ span {
 
   /* Ajusta imagem do sobre */
   .sobre-img img {
-      width: 280px !important;
+      width: 260px !important;
       height: auto !important;
       transform: translateX(0) !important;
       transition: transform 0.3s ease;
